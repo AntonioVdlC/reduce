@@ -1,4 +1,4 @@
-import { sum, average } from "../src/index.ts";
+import { sum, average, groupBy } from "../src/index.ts";
 
 describe("sum", () => {
   it("is a function", () => {
@@ -93,5 +93,36 @@ describe("average", () => {
 
       expect(actual).toEqual(expected);
     });
+  });
+});
+
+describe("groupBy", () => {
+  it("is a function", () => {
+    expect(typeof groupBy).toBe("function");
+  });
+
+  it("returns a function", () => {
+    expect(typeof groupBy()).toBe("function");
+  });
+
+  it("groups by a key value", () => {
+    const arr = [
+      { name: "Alice", age: 25 },
+      { name: "Bob", age: 32 },
+      { name: "Candice", age: 54 },
+      { name: "Tom", age: 25 },
+    ];
+
+    const expected = {
+      25: [
+        { age: 25, name: "Alice" },
+        { age: 25, name: "Tom" },
+      ],
+      32: [{ age: 32, name: "Bob" }],
+      54: [{ age: 54, name: "Candice" }],
+    };
+    const actual = arr.reduce(groupBy("age"));
+
+    expect(actual).toEqual(expected);
   });
 });

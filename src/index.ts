@@ -66,4 +66,28 @@ average.on = (key: string) => {
   };
 };
 
-export { sum, average };
+/**
+ *
+ * @param key
+ * @returns
+ */
+function groupBy(key: string) {
+  return (acc: Record<string, any>, curr: Record<string, any>, i: number) => {
+    if (i === 1) {
+      const k = String(getValueByKey(acc, key));
+      acc = {
+        [k]: [acc],
+      };
+    }
+
+    const k = String(getValueByKey(curr, key));
+    if (!acc[k]) {
+      acc[k] = [];
+    }
+    acc[k].push(curr);
+
+    return acc;
+  };
+}
+
+export { sum, average, groupBy };
