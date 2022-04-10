@@ -67,9 +67,10 @@ average.on = (key: string) => {
 };
 
 /**
- *
+ * Returns an object where keys are the values of the objects and the value is the object
+ * itself.
  * @param key
- * @returns
+ * @returns Object
  */
 function groupBy(key: string) {
   return (acc: Record<string, any>, curr: Record<string, any>, i: number) => {
