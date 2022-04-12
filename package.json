@@ -1,7 +1,7 @@
 {
   "name": "@antoniovdlc/reduce",
   "version": "0.1.2",
-  "description": "",
+  "description": "Custom reduce functions.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
@@ -24,7 +24,10 @@
     "postversion": "git push && git push --tags"
   },
   "keywords": [
-    ""
+    "reduce",
+    "array",
+    "sum",
+    "average"
   ],
   "author": "Antonio Villagra De La Cruz",
   "repository": {
