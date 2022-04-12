@@ -12,14 +12,14 @@
   ],
   "scripts": {
     "prepare": "husky install",
-    "type:check": "tsc --noEmit",
+    "type:check": "tsc src/*.ts --noEmit",
     "format": "prettier --write --ignore-unknown {src,test}/*",
     "format:check": "prettier --check {src,test}/*",
-    "test": "jest",
+    "test": "vitest run --coverage",
     "pre-commit": "lint-staged",
     "prebuild": "rimraf dist && mkdir dist",
     "build": "npm run build:types && npm run build:lib",
-    "build:types": "tsc --declaration --emitDeclarationOnly --outDir dist",
+    "build:types": "tsc src/*.ts --declaration --emitDeclarationOnly --outDir dist",
     "build:lib": "rollup -c",
     "postversion": "git push && git push --tags"
   },
@@ -37,25 +37,20 @@
   "homepage": "https://github.com/AntonioVdlC/reduce#readme",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.17.5",
-    "@babel/preset-env": "^7.16.8",
-    "@babel/preset-typescript": "^7.16.7",
     "@rollup/plugin-typescript": "^8.3.0",
-    "@types/jest": "^27.4.0",
-    "babel-jest": "^27.5.1",
+    "c8": "^7.11.0",
     "eslint": "^8.9.0",
     "eslint-config-prettier": "^8.4.0",
-    "eslint-plugin-jest": "^26.1.1",
     "husky": "^7.0.4",
-    "jest": "^27.4.7",
-    "jest-extended": "^1.2.0",
     "lint-staged": "^12.3.4",
     "prettier": "^2.5.1",
     "rimraf": "^3.0.2",
     "rollup": "^2.68.0",
     "rollup-plugin-terser": "^7.0.2",
     "tslib": "^2.3.0",
-    "typescript": "^4.5.4"
+    "typescript": "^4.5.4",
+    "vite": "^2.9.1",
+    "vitest": "^0.9.3"
   },
   "dependencies": {
     "get-value-key": "^0.1.0"

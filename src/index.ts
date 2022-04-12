@@ -6,7 +6,7 @@ import getValueByKey from "get-value-key";
  * @param curr
  * @returns Sum
  */
-function sum(acc: number, curr: number): number {
+function sum(acc: string | number, curr: string | number): number {
   return Number(acc) + Number(curr);
 }
 /**
@@ -33,10 +33,10 @@ sum.on = (key: string) => {
  * @returns Average
  */
 function average(
-  acc: number,
-  curr: number,
+  acc: string | number,
+  curr: string | number,
   i: number,
-  arr: Array<number>
+  arr: Array<string | number>
 ): number {
   return (
     (i === 1 ? Number(acc) / arr.length : Number(acc)) +
@@ -52,7 +52,7 @@ average.on = (key: string) => {
   return (
     acc: Record<string, any> | number,
     curr: Record<string, any>,
-    _: never,
+    _: number,
     arr: Array<Record<string, any>>
   ): number => {
     return (
@@ -74,7 +74,10 @@ average.on = (key: string) => {
  */
 function groupBy(key: string) {
   return (acc: Record<string, any>, curr: Record<string, any>, i: number) => {
-    if (i === 1) {
+    if (
+      i === 1 &&
+      Object.keys(acc).every((k) => Object.keys(curr).includes(k))
+    ) {
       const k = String(getValueByKey(acc, key));
       acc = {
         [k]: [acc],

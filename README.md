@@ -53,6 +53,9 @@ const arr = [
 arr.reduce(average.on("age")); // 42
 ```
 
+> Note that if you are using TypeScript, you need to pass an initialization value:
+> `arr.reduce(average.on("age"), 0); // 42`
+
 ## Reduce functions
 
 Here is a list of provided reduce functions:

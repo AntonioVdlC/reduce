@@ -1,4 +1,6 @@
-import { sum, average, groupBy } from "../src/index.ts";
+import { describe, it, expect } from "vitest";
+
+import { sum, average, groupBy } from "../src";
 
 describe("sum", () => {
   it("is a function", () => {
@@ -32,16 +34,29 @@ describe("sum", () => {
     });
 
     it("returns a function", () => {
-      expect(typeof sum.on()).toBe("function");
+      expect(typeof sum.on("")).toBe("function");
     });
 
-    it("sums an array of objects", () => {
+    it("sums an array of objects (with no initialization value)", () => {
       const expected = 111;
       const actual = [
         { name: "Alice", age: 25 },
         { name: "Bob", age: 32 },
         { name: "Candice", age: 54 },
-      ].reduce(sum.on("age"));
+      ]
+        // @ts-ignore
+        .reduce(sum.on("age"));
+
+      expect(actual).toEqual(expected);
+    });
+
+    it("sums an array of objects (with initialization value)", () => {
+      const expected = 111;
+      const actual = [
+        { name: "Alice", age: 25 },
+        { name: "Bob", age: 32 },
+        { name: "Candice", age: 54 },
+      ].reduce(sum.on("age"), 0);
 
       expect(actual).toEqual(expected);
     });
@@ -80,16 +95,29 @@ describe("average", () => {
     });
 
     it("returns a function", () => {
-      expect(typeof average.on()).toBe("function");
+      expect(typeof average.on("")).toBe("function");
     });
 
-    it("averages an array of objects", () => {
+    it("averages an array of objects (with no initialization value)", () => {
       const expected = 37;
       const actual = [
         { name: "Alice", age: 25 },
         { name: "Bob", age: 32 },
         { name: "Candice", age: 54 },
-      ].reduce(average.on("age"));
+      ]
+        // @ts-ignore
+        .reduce(average.on("age"));
+
+      expect(actual).toEqual(expected);
+    });
+
+    it("averages an array of objects (with initialization value)", () => {
+      const expected = 37;
+      const actual = [
+        { name: "Alice", age: 25 },
+        { name: "Bob", age: 32 },
+        { name: "Candice", age: 54 },
+      ].reduce(average.on("age"), 0);
 
       expect(actual).toEqual(expected);
     });
@@ -102,10 +130,10 @@ describe("groupBy", () => {
   });
 
   it("returns a function", () => {
-    expect(typeof groupBy()).toBe("function");
+    expect(typeof groupBy("")).toBe("function");
   });
 
-  it("groups by a key value", () => {
+  it("groups by a key value (with no initialization value)", () => {
     const arr = [
       { name: "Alice", age: 25 },
       { name: "Bob", age: 32 },
@@ -121,7 +149,29 @@ describe("groupBy", () => {
       32: [{ age: 32, name: "Bob" }],
       54: [{ age: 54, name: "Candice" }],
     };
+    // @ts-ignore
     const actual = arr.reduce(groupBy("age"));
+
+    expect(actual).toEqual(expected);
+  });
+
+  it("groups by a key value (with initialization value)", () => {
+    const arr = [
+      { name: "Alice", age: 25 },
+      { name: "Bob", age: 32 },
+      { name: "Candice", age: 54 },
+      { name: "Tom", age: 25 },
+    ];
+
+    const expected = {
+      25: [
+        { age: 25, name: "Alice" },
+        { age: 25, name: "Tom" },
+      ],
+      32: [{ age: 32, name: "Bob" }],
+      54: [{ age: 54, name: "Candice" }],
+    };
+    const actual = arr.reduce(groupBy("age"), {});
 
     expect(actual).toEqual(expected);
   });
