@@ -40,7 +40,7 @@
   "homepage": "https://github.com/AntonioVdlC/reduce#readme",
   "license": "MIT",
   "devDependencies": {
-    "@rollup/plugin-typescript": "^8.3.0",
+    "@rollup/plugin-typescript": "^10.0.0",
     "c8": "^7.11.0",
     "eslint": "^8.9.0",
     "eslint-config-prettier": "^8.4.0",
